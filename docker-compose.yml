@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: weather-lab-postgres
+    environment:
+      POSTGRES_DB: weather_lab
+      POSTGRES_USER: weather
+      POSTGRES_PASSWORD: weather
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mysql:
+    image: mysql:8.4
+    container_name: weather-lab-mysql
+    command:
+      - --mysql-native-password=ON
+      - --authentication-policy=mysql_native_password
+    environment:
+      MYSQL_DATABASE: weather_lab
+      MYSQL_USER: weather
+      MYSQL_PASSWORD: weather
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  postgres_data:
+  mysql_data:
